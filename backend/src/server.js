@@ -1,0 +1,29 @@
+import express from "express"
+import createNotesRoutes from "./routes/notesRoutes.js"
+import createUserRoutes from "./routes/usersRoutes.js"
+import { connectnotesDB, connectusersDB } from "./config/db.js"
+import dotenv from "dotenv"
+dotenv.config()
+let notesDB
+let usersDB
+const startServer = async () => {
+    try {
+        notesDB = await connectnotesDB()
+        usersDB = await connectusersDB()
+        console.log("Databases connected")
+    } catch (error) {
+        console.error("Error connecting to the databases !")
+        process.exit(1);
+    }
+    const PORT = process.env.PORT || 5003
+    const app = express();
+    app.use(express.json())
+    app.use("/api/notes", createNotesRoutes(notesDB))
+    app.use("/api", createUserRoutes(usersDB))
+    app.use
+    app.listen((PORT) || 5003, () => {
+        console.log("Server started on port:", PORT)
+    })
+
+}
+startServer();
