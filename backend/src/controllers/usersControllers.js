@@ -1,6 +1,8 @@
 
 import bcrypt from "bcrypt"
 import nodemailer from "nodemailer"
+import dotenv from "dotenv"
+dotenv.config()
 
 export const getUsers = (User) => async (req, res) => {
     try {
@@ -28,8 +30,8 @@ export const signUp = (User) => async (req, res) => {
             port:587,
             secure:false,
             auth:{
-                user:"nezaniel2@gmail.com",
-                pass:"jntmdglemipexioh"
+                user:process.env.USER_NAME,
+                pass:process.env.USER_PASS
             }
         
         })
