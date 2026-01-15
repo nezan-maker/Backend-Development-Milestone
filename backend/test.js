@@ -1,3 +1,6 @@
+import crypto from "crypto"
+const token = crypto.randomBytes(64).toString("hex")
+console.log(token)
 const studentList = [
     { name: "Neza", age: 12, marks: 10 },
     { name: "Niel", age: 14, marks: 10 },

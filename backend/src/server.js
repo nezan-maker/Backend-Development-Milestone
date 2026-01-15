@@ -2,6 +2,7 @@ import express from "express"
 import createNotesRoutes from "./routes/notesRoutes.js"
 import createUserRoutes from "./routes/usersRoutes.js"
 import { connectnotesDB, connectusersDB } from "./config/db.js"
+import cookieParser from "cookie-parser"
 import dotenv from "dotenv"
 dotenv.config()
 let notesDB
@@ -18,10 +19,10 @@ const startServer = async () => {
     const PORT = process.env.PORT || 5003
     const app = express();
     app.use(express.json())
+    app.use(cookieParser())
     app.use("/api/notes", createNotesRoutes(notesDB))
     app.use("/api", createUserRoutes(usersDB))
-    app.use
-    app.listen((PORT) || 5003, () => {
+    app.listen((PORT), () => {
         console.log("Server started on port:", PORT)
     })
 

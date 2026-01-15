@@ -10,11 +10,28 @@ export const createUserModel = (usersDB) => {
         },
         password: {
             type: String,
-            required: true
+            required: true,
+            minlength: 8
         },
         email: {
-            type:String,
-            required:true
+            type: String,
+            required: true,
+            unique: true
+        },
+        emailConfirmed: {
+            type: Boolean,
+            default: false
+        },
+        emailToken: {
+            type: String
+        },
+        refreshToken: {
+            type: String,
+            default: null
+        },
+        tokenVersion: {
+            type: Number,
+            default: 1
         }
     }, { timestamps: true })
     return usersDB.model("User", userSchema)

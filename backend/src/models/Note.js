@@ -5,6 +5,11 @@ export const createNoteModel = (notesDB) => {
         return notesDB.models.Note
     }
     const noteSchema = new mongoose.Schema({
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
         title: {
             type: String,
             required: true
